@@ -26,6 +26,16 @@
                     </x-ui.accordion-item>
                 @endforeach
             </div>
+
+            <!-- Tombol Navigasi Lintas FAQ -->
+            <div style="text-align:center; margin-top: 40px;">
+                <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-muted);">
+                    Ingin mencari informasi seputar peminjaman dan pengelolaan arsip?
+                </p>
+                <x-ui.button href="{{ route('FAQarsip') }}" variant="outline" size="md">
+                    Lihat FAQ Kearsipan
+                </x-ui.button>
+            </div>
         </div>
     </main>
 </x-layout.app>

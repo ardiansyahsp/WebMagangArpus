@@ -29,33 +29,38 @@ export function initNavigation() {
     }
 
     // 2. Dropdown Menu Handling (Accessible for Click & Keyboard)
-    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 
-    dropdownToggles.forEach((btn) => {
-        btn.addEventListener('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
+dropdownToggles.forEach((btn) => {
+    btn.addEventListener('click', function (e) {
+        // Cegah script berjalan di layar desktop (> 992px) karena sudah pakai hover CSS
+        if (window.innerWidth > 992) {
+            return; // Biarkan hover CSS yang bekerja
+        }
 
-            const parent = this.closest('.dropdown');
-            const menu = parent ? parent.querySelector('.dropdown-menu') : null;
-            const isShown = menu ? menu.classList.contains('show') : false;
+        e.preventDefault();
+        e.stopPropagation();
 
-            // Close other open dropdowns
-            document.querySelectorAll('.dropdown-menu.show').forEach((otherMenu) => {
-                if (otherMenu !== menu) {
-                    otherMenu.classList.remove('show');
-                    const otherBtn = otherMenu.closest('.dropdown')?.querySelector('.dropdown-toggle');
-                    if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
-                }
-            });
+        const parent = this.closest('.dropdown') || this.closest('.main-nav__item');
+        const menu = parent ? parent.querySelector('.dropdown-menu') : null;
+        const isShown = menu ? menu.classList.contains('show') : false;
 
-            // Toggle current
-            if (menu) {
-                menu.classList.toggle('show', !isShown);
-                btn.setAttribute('aria-expanded', String(!isShown));
+        // Close other open dropdowns
+        document.querySelectorAll('.dropdown-menu.show').forEach((otherMenu) => {
+            if (otherMenu !== menu) {
+                otherMenu.classList.remove('show');
+                const otherBtn = otherMenu.closest('.dropdown')?.querySelector('.dropdown-toggle');
+                if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
             }
         });
+
+        // Toggle current
+        if (menu) {
+            menu.classList.toggle('show', !isShown);
+            btn.setAttribute('aria-expanded', String(!isShown));
+        }
     });
+});
 
     // Close dropdowns & mobile menu when clicking outside
     document.addEventListener('click', (e) => {

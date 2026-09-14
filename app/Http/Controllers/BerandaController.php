@@ -44,4 +44,14 @@ class BerandaController extends Controller
             'faqList'
         ));
     }
+
+    /**
+     * Menampilkan Halaman Jadwal Perpustakaan Keliling
+     */
+    public function jadwal(): View
+    {
+        $jadwalList = $this->berandaService->getJadwalKeliling();
+        
+        return view('jadwal-keliling', compact('jadwalList'));
+    }
 }

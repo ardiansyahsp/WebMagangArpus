@@ -97,4 +97,51 @@ class BerandaService
             ['name' => 'SuaraMerdeka', 'logo' => 'asset/suaramerdeka.png', 'url' => 'https://www.suaramerdeka.com/'],
         ];
     }
+
+    /**
+     * Get jadwal perpustakaan keliling.
+     *
+     * @return array<int, array<string, string>>
+     */
+    public function getJadwalKeliling(): array
+    {
+        return [
+            [
+                'hari' => 'Senin',
+                'tanggal' => '14 September 2026',
+                'waktu' => '08:30 - 12:00 WIB',
+                'titik' => 'SDN 01 Ngaliyan',
+                'wilayah' => 'Kecamatan Ngaliyan',
+                'status' => 'Selesai', // Bisa 'Selesai', 'Sedang Berjalan', atau 'Akan Datang'
+                'warna_pin' => 'var(--danger)' // Merah (sudah lewat)
+            ],
+            [
+                'hari' => 'Rabu',
+                'tanggal' => '16 September 2026',
+                'waktu' => '09:00 - 13:00 WIB',
+                'titik' => 'Balai RW 05 Tembalang',
+                'wilayah' => 'Kecamatan Tembalang',
+                'status' => 'Akan Datang',
+                'warna_pin' => 'var(--primary)' // Biru/Primary (jadwal aktif)
+            ],
+            [
+                'hari' => 'Kamis',
+                'tanggal' => '17 September 2026',
+                'waktu' => '08:30 - 12:00 WIB',
+                'titik' => 'Taman Tirto Agung',
+                'wilayah' => 'Kecamatan Banyumanik',
+                'status' => 'Akan Datang',
+                'warna_pin' => 'var(--primary)'
+            ],
+            [
+                'hari' => 'Sabtu',
+                'tanggal' => '19 September 2026',
+                'waktu' => '15:00 - 17:30 WIB',
+                'titik' => 'Simpang Lima (Car Free Day Prep)',
+                'wilayah' => 'Kecamatan Semarang Selatan',
+                'status' => 'Akan Datang',
+                'warna_pin' => 'var(--primary)'
+            ],
+        ];
+    }
 }

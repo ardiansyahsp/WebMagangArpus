@@ -22,8 +22,10 @@
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
-                    <label for="sibaja-search" class="visually-hidden">Cari istilah budaya Jawa Sibaja</label>
-                    <input id="sibaja-search" type="text" placeholder="Cari istilah budaya Jawa di SIBAJA (contoh: Unggah-ungguh, Weton, Batik)..." autocomplete="off">
+                    
+                    <!-- Tag label dihapus, diganti menggunakan aria-label di dalam input -->
+                    <input id="sibaja-search" type="text" aria-label="Cari istilah budaya Jawa Sibaja" placeholder="Cari istilah budaya Jawa di SIBAJA (contoh: Unggah-ungguh, Weton, Batik)..." autocomplete="off">
+                    
                     <button type="button" id="mic-btn" class="mic-action-btn" aria-label="Pencarian Suara Voice Search">
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
@@ -80,7 +82,7 @@
                             <span class="katalog-card__badge">Mobil Pintar</span>
                             <h3 class="katalog-card__title">Armada Perpustakaan Keliling</h3>
                             <p class="katalog-card__desc">Menjangkau sekolah dasar, taman kota, dan balai RW untuk mendekatkan bahan bacaan bermutu ke masyarakat.</p>
-                            <x-ui.button href="{{ route('tentang') }}" variant="outline" size="sm">Jadwal Keliling</x-ui.button>
+                            <x-ui.button href="{{ route('jadwal.keliling') }}" variant="outline" size="sm">Jadwal Keliling</x-ui.button>
                         </div>
                     </div>
 

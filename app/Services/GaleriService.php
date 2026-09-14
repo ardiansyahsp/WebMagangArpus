@@ -68,8 +68,8 @@ class GaleriService
             [
                 'id' => '1',
                 'title' => 'Profil Singkat Dinas Arsip dan Perpustakaan',
-                'youtube_id' => '8cLyuxUIj_Q',
-                'embed_url' => 'https://www.youtube.com/embed/8cLyuxUIj_Q',
+                'youtube_id' => '6rlkqT7Z-GA',
+                'embed_url' => 'https://www.youtube.com/embed/6rlkqT7Z-GA',
             ],
             [
                 'id' => '2',
@@ -83,6 +83,90 @@ class GaleriService
                 'youtube_id' => 'gL81MXIIdOQ',
                 'embed_url' => 'https://www.youtube.com/embed/gL81MXIIdOQ',
             ],
+        ];
+    }
+
+    /**
+     * Get Instagram Reels/Posts items via API.
+     *
+     * @return array<int, array<string, string>>
+     */
+    public function getInstagramList(): array
+    {
+        // 1. Ambil kredensial dari file konfigurasi .env
+        $accessToken = env('INSTAGRAM_ACCESS_TOKEN');
+        $igUserId = env('INSTAGRAM_USER_ID');
+
+        // 2. Jika token belum diisi oleh pembimbing, gunakan data cadangan
+        if (empty($accessToken) || empty($igUserId)) {
+            return $this->getDummyInstagramData();
+        }
+
+        // 3. Tarik data dari API Meta/Instagram
+        try {
+            $response = \Illuminate\Support\Facades\Http::timeout(10)->get("https://graph.facebook.com/v18.0/{$igUserId}/media", [
+                'fields' => 'media_type,thumbnail_url,media_url,permalink',
+                'access_token' => $accessToken,
+                'limit' => 4 // Maksimal 4 postingan
+            ]);
+
+            if ($response->successful()) {
+                $data = $response->json()['data'] ?? [];
+                $formattedPosts = [];
+
+                foreach ($data as $post) {
+                    $formattedPosts[] = [
+                        'media_type'    => $post['media_type'] ?? 'IMAGE',
+                        // Jika Reels gunakan thumbnail_url, jika Foto gunakan media_url
+                        'thumbnail_url' => ($post['media_type'] ?? '') === 'VIDEO' 
+                                            ? ($post['thumbnail_url'] ?? '') 
+                                            : ($post['media_url'] ?? ''),
+                        'permalink'     => $post['permalink'] ?? '#'
+                    ];
+                }
+
+                // Pastikan ada isinya sebelum dikembalikan
+                if (count($formattedPosts) > 0) {
+                    return $formattedPosts;
+                }
+            }
+        } catch (\Exception $e) {
+            // Mencatat error ke log sistem Laravel tanpa membuat website crash
+            \Illuminate\Support\Facades\Log::error('Instagram API Error: ' . $e->getMessage());
+        }
+
+        // 4. Fallback: Jika API gagal merespons, otomatis pakai data cadangan
+        return $this->getDummyInstagramData();
+    }
+
+    /**
+     * Fallback Dummy Data (Data Cadangan)
+     *
+     * @return array<int, array<string, string>>
+     */
+    private function getDummyInstagramData(): array
+    {
+        return [
+            [
+                'media_type'    => 'VIDEO', 
+                'thumbnail_url' => 'asset/arsip1.jpg',
+                'permalink'     => 'https://www.instagram.com/reel/DdBhrlDStAP/'
+            ],
+            [
+                'media_type'    => 'VIDEO', 
+                'thumbnail_url' => 'asset/buku1.jpg',
+                'permalink'     => 'https://www.instagram.com/reel/DdF4YVdPmsl/'
+            ],
+            [
+                'media_type'    => 'VIDEO', 
+                'thumbnail_url' => 'asset/tembalang.jpg',
+                'permalink'     => 'https://www.instagram.com/reel/DdIts19RPf7/'
+            ],
+            [
+                'media_type'    => 'VIDEO', 
+                'thumbnail_url' => 'asset/semarang.jpg',
+                'permalink'     => 'https://www.instagram.com/reel/DdLUisNAJ9K/'
+            ]
         ];
     }
 

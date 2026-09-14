@@ -22,13 +22,14 @@ class GaleriController extends Controller
     }
 
     /**
-     * Display Video Gallery.
+     * Display Video and Instagram Gallery.
      */
     public function video(): View
     {
         $videos = $this->galeriService->getVideoList();
+        $instagramPosts = $this->galeriService->getInstagramList();
 
-        return view('video', compact('videos'));
+        return view('video', compact('videos', 'instagramPosts'));
     }
 
     /**

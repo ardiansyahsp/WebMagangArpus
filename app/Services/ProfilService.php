@@ -152,7 +152,7 @@ class ProfilService
             [
                 'badge' => 'Arsip Daerah',
                 'badge_class' => '',
-                'image' => 'asset/Card Background Image.png',
+                'image' => 'asset/bakgron.jpg',
                 'title' => 'Kearsipan',
                 'definition' => 'adalah hal-hal yang berkenaan dengan arsip. Arsip adalah rekaman kegiatan atau peristiwa dalam berbagai bentuk dan media sesuai dengan perkembangan teknologi informasi dan komunikasi yang dibuat dan diterima oleh lembaga negara, pemerintahan daerah, lembaga pendidikan, perusahaan, organisasi politik, organisasi kemasyarakatan, dan perseorangan dalam pelaksanaan kehidupan bermasyarakat berbangsa dan bernegara.',
                 'citation' => '(UU No. 43 Tahun 2009)',
@@ -161,7 +161,7 @@ class ProfilService
             [
                 'badge' => 'Pustaka & Digital',
                 'badge_class' => 'gold-badge',
-                'image' => 'asset/bakgron.jpg',
+                'image' => 'asset/Foto-perpustakaan.jpg',
                 'title' => 'Perpustakaan',
                 'definition' => 'adalah institusi yang mengumpulkan pengetahuan tercetak dan terekam, mengelolanya dengan cara khusus guna memenuhi kebutuhan intelektualitas para penggunanya melalui beragam cara interaksi pengetahuan.',
                 'citation' => '(UU No. 43 Tahun 2007)',

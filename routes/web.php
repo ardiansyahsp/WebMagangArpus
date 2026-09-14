@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [BerandaController::class, 'index'])->name('home');
 Route::get('/welcome', [BerandaController::class, 'index'])->name('dashboard');
 
+// Jadwal Keliling
+Route::get('/jadwal-keliling', [BerandaController::class, 'jadwal'])->name('jadwal.keliling');
+
 // Profil Dinas
 Route::controller(ProfilController::class)->group(function () {
     Route::get('/visikota', 'visiKota')->name('visikota');
@@ -43,6 +46,8 @@ Route::controller(GaleriController::class)->group(function () {
 
 // Berita & Publikasi
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
+
+Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.detail');
 
 // Kontak & Pengaduan
 Route::controller(KontakController::class)->group(function () {

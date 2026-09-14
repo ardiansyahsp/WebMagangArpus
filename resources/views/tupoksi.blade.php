@@ -24,6 +24,18 @@
                     </div>
                 @endforeach
             </div>
+            
+            <!-- Tombol Navigasi Lanjut -->
+            <!-- Menu Navigasi Profil Lainnya -->
+            <div style="margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-light); text-align: center;">
+                <h3 style="font-family: var(--font-heading); font-size: 1.1rem; color: var(--text-dark); margin-bottom: 20px;">Jelajahi Profil Lainnya:</h3>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
+                    <x-ui.button href="{{ route('visikota') }}" variant="outline" size="sm">Visi & Misi Kota</x-ui.button>
+                    <x-ui.button href="{{ route('visiarpus') }}" variant="outline" size="sm">Visi & Misi Arpusda</x-ui.button>
+                    <x-ui.button href="{{ route('struktur') }}" variant="outline" size="sm">Struktur Organisasi</x-ui.button>
+                    <x-ui.button href="{{ route('tentang') }}" variant="outline" size="sm">Tentang Arpusda</x-ui.button>
+                </div>
+            </div>
         </div>
     </main>
 </x-layout.app>

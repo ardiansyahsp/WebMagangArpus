@@ -20,7 +20,7 @@
                         :date="$berita['date']"
                         :excerpt="$berita['excerpt']"
                         :image="asset($berita['image'])"
-                        :link="'#'"
+                        :link="route('berita.detail', $berita['slug'])"
                     />
                 @endforeach
             </div>
