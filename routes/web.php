@@ -21,6 +21,8 @@ Route::get('/welcome', [BerandaController::class, 'index'])->name('dashboard');
 
 // Jadwal Keliling
 Route::get('/jadwal-keliling', [BerandaController::class, 'jadwal'])->name('jadwal.keliling');
+Route::get('/usulan-buku', [BerandaController::class, 'usulanBuku'])->name('usulan.buku');
+Route::get('/usulan-buku/semua', [BerandaController::class, 'usulanSemua'])->name('usulan.semua');
 
 // Profil Dinas
 Route::controller(ProfilController::class)->group(function () {

@@ -54,4 +54,51 @@ class BerandaController extends Controller
         
         return view('jadwal-keliling', compact('jadwalList'));
     }
+
+    /**
+     * Menampilkan Halaman SI ULAN (Usulan Buku)
+     */
+    public function usulanBuku(): View
+    {
+        // Data sementara untuk daftar usulan (Tanpa menampilkan data pribadi KTA/Email)
+        $usulanList = [
+            // 5 Data Pertama (Muncul awal)
+            ['judul' => 'The Psychology of Money', 'pengarang' => 'Morgan Housel', 'tanggal' => '18 Sep 2026', 'status' => 'Tersedia'],
+            ['judul' => 'Ilmu Memahami Hadist Nabi', 'pengarang' => 'Zein, Ma\'shum', 'tanggal' => '17 Sep 2026', 'status' => 'Menunggu Review'],
+            ['judul' => 'Buku psikologi penunjang kuliah', 'pengarang' => 'Bebas', 'tanggal' => '16 Sep 2026', 'status' => 'Menunggu Review'],
+            ['judul' => 'Pulang-Pergi', 'pengarang' => 'Tere Liye', 'tanggal' => '14 Sep 2026', 'status' => 'Disetujui'],
+            ['judul' => 'Mengenal Pribadi Agung Muhammad', 'pengarang' => 'Imam Al Tirmidzi', 'tanggal' => '12 Sep 2026', 'status' => 'Tersedia'],
+            
+            // Data Tambahan (Tersembunyi, muncul saat diklik)
+            ['judul' => 'Atomic Habits', 'pengarang' => 'James Clear', 'tanggal' => '10 Sep 2026', 'status' => 'Tersedia'],
+            ['judul' => 'Filosofi Teras', 'pengarang' => 'Henry Manampiring', 'tanggal' => '09 Sep 2026', 'status' => 'Disetujui'],
+            ['judul' => 'Bumi Manusia', 'pengarang' => 'Pramoedya Ananta Toer', 'tanggal' => '05 Sep 2026', 'status' => 'Menunggu Review'],
+            ['judul' => 'Sapiens', 'pengarang' => 'Yuval Noah Harari', 'tanggal' => '01 Sep 2026', 'status' => 'Tersedia'],
+            ['judul' => 'Laut Bercerita', 'pengarang' => 'Leila S. Chudori', 'tanggal' => '28 Ags 2026', 'status' => 'Disetujui'],
+        ];
+        
+        return view('usulan-buku', compact('usulanList'));
+    }
+    /**
+     * Menampilkan Halaman Seluruh Usulan Buku (Tabel Full Width)
+     */
+    public function usulanSemua(): View
+    {
+        $usulanList = [
+            ['judul' => 'The Psychology of Money', 'pengarang' => 'Morgan Housel', 'tanggal' => '18 Sep 2026', 'status' => 'Tersedia'],
+            ['judul' => 'Ilmu Memahami Hadist Nabi', 'pengarang' => 'Zein, Ma\'shum', 'tanggal' => '17 Sep 2026', 'status' => 'Menunggu Review'],
+            ['judul' => 'Buku psikologi penunjang kuliah', 'pengarang' => 'Bebas', 'tanggal' => '16 Sep 2026', 'status' => 'Menunggu Review'],
+            ['judul' => 'Pulang-Pergi', 'pengarang' => 'Tere Liye', 'tanggal' => '14 Sep 2026', 'status' => 'Disetujui'],
+            ['judul' => 'Mengenal Pribadi Agung Muhammad', 'pengarang' => 'Imam Al Tirmidzi', 'tanggal' => '12 Sep 2026', 'status' => 'Tersedia'],
+            ['judul' => 'Atomic Habits', 'pengarang' => 'James Clear', 'tanggal' => '10 Sep 2026', 'status' => 'Tersedia'],
+            ['judul' => 'Filosofi Teras', 'pengarang' => 'Henry Manampiring', 'tanggal' => '09 Sep 2026', 'status' => 'Disetujui'],
+            ['judul' => 'Bumi Manusia', 'pengarang' => 'Pramoedya Ananta Toer', 'tanggal' => '05 Sep 2026', 'status' => 'Menunggu Review'],
+            ['judul' => 'Sapiens', 'pengarang' => 'Yuval Noah Harari', 'tanggal' => '01 Sep 2026', 'status' => 'Tersedia'],
+            ['judul' => 'Laut Bercerita', 'pengarang' => 'Leila S. Chudori', 'tanggal' => '28 Ags 2026', 'status' => 'Disetujui'],
+        ];
+        
+        return view('usulan-semua', compact('usulanList'));
+    }
 }
+
+

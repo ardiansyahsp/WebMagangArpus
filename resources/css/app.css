@@ -3,6 +3,7 @@
    Component-Based Architecture | Clean CSS | Mobile-First Responsive
    ========================================================================== */
 @import 'berita-detail.css';
+
 :root {
   /* Brand Color Palette */
   --primary: #7a1414;
@@ -1599,26 +1600,31 @@ button {
 
 .coverflow-track {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 20px 10px 40px 10px;
-  scrollbar-width: thin;
+  scroll-snap-type: x mandatory; /* Efek magnet agar kartu berhenti pas di tengah */
+  /* UBAH BARIS PADDING MENJADI SEPERTI INI */
+  padding: 30px calc(50% - 150px) 50px calc(50% - 150px);
+  
+  /* Menyembunyikan scrollbar bawaan browser */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-
 .coverflow-track::-webkit-scrollbar {
-  height: 6px;
-}
-
-.coverflow-track::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
+  display: none;
 }
 
 .coverflow-item {
-  flex: 0 0 290px;
+  flex: 0 0 300px;
+  scroll-snap-align: center; /* Titik henti magnetik di tengah */
   cursor: pointer;
-  transition: all var(--transition-normal);
+  transition: all 0.5s ease;
+  
+  /* Efek redup untuk kartu yang tidak sedang di tengah */
+  opacity: 0.4; 
+  transform: scale(0.9);
+  filter: grayscale(40%);
 }
 
 .coverflow-card {
@@ -1627,44 +1633,57 @@ button {
   overflow: hidden;
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
-  transition: all var(--transition-normal);
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Mengunci tinggi semua kartu agar seragam bawahnya */
 }
 
 .coverflow-card img {
   width: 100%;
-  height: 200px;
+  height: 220px; /* Mengunci tinggi gambar dengan pasti */
   object-fit: cover;
 }
 
 .coverflow-caption {
-  padding: 16px;
+  padding: 20px 16px;
+  flex: 1;
 }
 
 .coverflow-caption h4 {
   font-family: var(--font-heading);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-dark);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  line-height: 1.4;
 }
 
 .coverflow-caption p {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
 }
 
+/* Efek Fokus (Highlight) saat kartu berada di tengah layar */
+.coverflow-item.active {
+  opacity: 1;
+  transform: scale(1.05); /* Membesar */
+  filter: grayscale(0%);
+  z-index: 2;
+}
+
 .coverflow-item.active .coverflow-card {
-  transform: translateY(-8px) scale(1.03);
   box-shadow: var(--shadow-hover);
   border-color: var(--primary);
 }
 
+/* Tombol Panah Navigasi */
 .coverflow-nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: var(--primary);
   color: #ffffff;
@@ -1675,6 +1694,7 @@ button {
   z-index: 10;
   font-size: 1.2rem;
   transition: all var(--transition-fast);
+  border: 2px solid white; /* Memberi outline putih elegan */
 }
 
 .coverflow-nav-btn:hover {
@@ -1682,8 +1702,8 @@ button {
   transform: translateY(-50%) scale(1.1);
 }
 
-.coverflow-nav-btn.prev-btn { left: -22px; }
-.coverflow-nav-btn.next-btn { right: -22px; }
+.coverflow-nav-btn.prev-btn { left: -24px; }
+.coverflow-nav-btn.next-btn { right: -24px; }
 
 /* ========================= KONTAK & FORM ========================= */
 .kontak-section-modern {

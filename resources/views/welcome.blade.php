@@ -88,13 +88,13 @@
 
                     <div class="katalog-card">
                         <div class="katalog-card__img-wrap">
-                            <img src="{{ asset('asset/tembalang.jpg') }}" alt="Coworking Space Ruang Baca" class="katalog-card__img" loading="lazy">
+                            <img src="{{ asset('asset/tembalang.jpg') }}" alt="Sistem Informasi Usulan Buku" class="katalog-card__img" loading="lazy">
                         </div>
                         <div class="katalog-card__body">
-                            <span class="katalog-card__badge">Fasilitas</span>
-                            <h3 class="katalog-card__title">Coworking & Ruang Diskusi</h3>
-                            <p class="katalog-card__desc">Area kerja kolaboratif ber-AC dilengkapi Wi-Fi berkecepatan tinggi dan stopkontak untuk kenyamanan belajar.</p>
-                            <x-ui.button href="https://pesanruang.arpusda.semarangkota.go.id/" target="_blank" variant="outline" size="sm">Pesan Ruang</x-ui.button>
+                            <span class="katalog-card__badge">Layanan Interaktif</span>
+                            <h3 class="katalog-card__title">SI ULAN (Usulan Buku)</h3>
+                            <p class="katalog-card__desc">Bantu kami memperkaya koleksi perpustakaan dengan mengusulkan buku favorit atau referensi bacaan yang Anda butuhkan.</p>
+                            <x-ui.button href="{{ route('usulan.buku') }}" variant="outline" size="sm">Usulkan Buku</x-ui.button>
                         </div>
                     </div>
                 </div>

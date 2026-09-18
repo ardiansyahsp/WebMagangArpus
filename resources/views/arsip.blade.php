@@ -38,4 +38,51 @@
             </div>
         </div>
     </section>
+    <!-- Otak Interaksi Pameran Virtual -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.getElementById('coverflowTrack');
+            const items = document.querySelectorAll('.coverflow-item');
+            const btnPrev = document.querySelector('.prev-btn');
+            const btnNext = document.querySelector('.next-btn');
+
+            // Fungsi untuk mendeteksi kartu mana yang posisinya paling tengah di layar
+            function updateActiveItem() {
+                let centerPos = track.getBoundingClientRect().left + (track.clientWidth / 2);
+                let closestItem = null;
+                let closestDistance = Infinity;
+
+                items.forEach(item => {
+                    let itemCenter = item.getBoundingClientRect().left + (item.clientWidth / 2);
+                    let distance = Math.abs(centerPos - itemCenter);
+                    
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestItem = item;
+                    }
+                });
+
+                // Pindahkan class 'active' ke kartu yang paling tengah
+                items.forEach(i => i.classList.remove('active'));
+                if (closestItem) {
+                    closestItem.classList.add('active');
+                }
+            }
+
+            // Jalankan deteksi setiap kali pengunjung menggeser (scroll/swipe)
+            track.addEventListener('scroll', updateActiveItem);
+
+            // Fungsi klik tombol panah
+            btnNext.addEventListener('click', () => {
+                track.scrollBy({ left: 324, behavior: 'smooth' }); // Geser selebar 1 kartu
+            });
+
+            btnPrev.addEventListener('click', () => {
+                track.scrollBy({ left: -324, behavior: 'smooth' });
+            });
+
+            // Panggil sekali di awal agar kartu tengah langsung menyala
+            setTimeout(() => updateActiveItem(), 150);
+        });
+    </script>
 </x-layout.app>
