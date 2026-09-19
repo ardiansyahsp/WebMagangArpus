@@ -64,13 +64,13 @@
                 <div class="mk-grid">
                     <div class="katalog-card">
                         <div class="katalog-card__img-wrap">
-                            <img src="{{ asset('asset/buku1.jpg') }}" alt="Koleksi Buku Sejarah & Sastra" class="katalog-card__img" loading="lazy">
+                            <img src="{{ asset('asset/tembalang.jpg') }}" alt="Katalog Buku Online" class="katalog-card__img" loading="lazy">
                         </div>
                         <div class="katalog-card__body">
-                            <span class="katalog-card__badge">Buku Fisik</span>
-                            <h3 class="katalog-card__title">Koleksi Sejarah & Budaya Semarang</h3>
-                            <p class="katalog-card__desc">Ribuan koleksi buku sejarah lokal, monografi daerah, dan sastra klasik yang siap dibaca di ruang baca umum.</p>
-                            <x-ui.button href="{{ route('FAQperpus') }}" variant="outline" size="sm">Panduan Peminjaman</x-ui.button>
+                            <span class="katalog-card__badge" style="background: var(--info-bg); color: var(--info);">Eksplorasi Koleksi</span>
+                            <h3 class="katalog-card__title">Katalog Buku (OPAC)</h3>
+                            <p class="katalog-card__desc">Cari dan temukan puluhan ribu koleksi buku cetak, referensi akademik, hingga majalah yang tersedia di Perpustakaan.</p>
+                            <x-ui.button href="{{ route('katalog.buku') }}" variant="outline" size="sm">Cari Buku</x-ui.button>
                         </div>
                     </div>
 

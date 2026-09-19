@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [BerandaController::class, 'index'])->name('home');
 Route::get('/welcome', [BerandaController::class, 'index'])->name('dashboard');
 
+Route::get('/katalog-buku', [BerandaController::class, 'katalogBuku'])->name('katalog.buku');
+Route::get('/katalog-buku/{slug}', [BerandaController::class, 'detailBuku'])->name('katalog.detail');
 // Jadwal Keliling
 Route::get('/jadwal-keliling', [BerandaController::class, 'jadwal'])->name('jadwal.keliling');
 Route::get('/usulan-buku', [BerandaController::class, 'usulanBuku'])->name('usulan.buku');
