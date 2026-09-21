@@ -2,44 +2,81 @@
     'title' => '',
     'label' => '',
     'value' => '0',
+    'raw' => null,
     'description' => '',
     'growth' => null,
     'trend' => 'up',
     'icon' => 'book-open',
-    'color' => 'maroon'
+    'color' => 'maroon',
+    'sparkline' => null,
 ])
 
 @php
     $displayLabel = $title ?: $label;
+    $numericTarget = $raw ?? preg_replace('/[^0-9]/', '', $value);
+    $isNumeric = is_numeric($numericTarget) && $numericTarget > 0;
+    
+    // Sparkline points mock based on color/type
+    $sparkPoints = match($color) {
+        'maroon' => '12,18,15,28,24,38,45',
+        'gold' => '8,15,22,19,30,26,40',
+        'blue' => '20,18,32,25,36,44,52',
+        'amber' => '5,12,8,15,10,18,22',
+        default => '10,20,15,25,30,28,35',
+    };
+
+    $sparkColor = match($color) {
+        'maroon' => '#a11212',
+        'gold' => '#f4b400',
+        'blue' => '#0ea5e9',
+        'amber' => '#f59e0b',
+        default => '#a11212',
+    };
 @endphp
 
-<div class="stat-card stat-card--{{ $color }}">
+<div class="stat-card stat-card--{{ $color }} animate-fade-up">
     <div class="stat-card__top">
         <div class="stat-card__icon">
             @if($icon === 'book-open' || $icon === 'book')
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                <i data-lucide="book-open" style="width: 22px; height: 22px;"></i>
             @elseif($icon === 'archive')
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                <i data-lucide="archive" style="width: 22px; height: 22px;"></i>
             @elseif($icon === 'globe')
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                <i data-lucide="globe-2" style="width: 22px; height: 22px;"></i>
             @elseif($icon === 'search' || $icon === 'file-search')
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <i data-lucide="file-search" style="width: 22px; height: 22px;"></i>
             @elseif($icon === 'users')
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <i data-lucide="users" style="width: 22px; height: 22px;"></i>
+            @elseif($icon === 'file-text')
+                <i data-lucide="file-text" style="width: 22px; height: 22px;"></i>
             @else
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <i data-lucide="layers" style="width: 22px; height: 22px;"></i>
             @endif
         </div>
+
         @if($growth)
             <span class="stat-card__badge">
-                {{ $growth }}
+                <i data-lucide="trending-up" style="width: 13px; height: 13px;"></i>
+                <span>{{ $growth }}</span>
             </span>
         @endif
     </div>
 
-    <div class="stat-card__value">{{ $value }}</div>
+    <!-- Animated Counting Number -->
+    <div class="stat-card__value" 
+         @if($isNumeric) 
+            data-counter-target="{{ $numericTarget }}" 
+            data-counter-prefix="" 
+         @endif>
+        {{ $value }}
+    </div>
+
     <div class="stat-card__label">{{ $displayLabel }}</div>
+    
     @if($description)
         <div class="stat-card__description">{{ $description }}</div>
     @endif
+
+    <!-- Mini Sparkline Visualization -->
+    <div class="stat-card__sparkline" data-sparkline="{{ $sparkPoints }}" data-sparkline-color="{{ $sparkColor }}"></div>
 </div>

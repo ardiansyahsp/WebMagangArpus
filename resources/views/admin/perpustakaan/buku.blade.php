@@ -10,55 +10,52 @@
     >
         <x-slot:actions>
             <button type="button" class="admin-btn admin-btn--primary" data-modal-target="tambahBukuModal">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
+                <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
                 <span>Tambah Buku Baru</span>
             </button>
         </x-slot:actions>
     </x-admin.page-header>
 
-    <!-- Data Table Card -->
+    <!-- Data Table Card (Supabase/Linear Style) -->
     <x-admin.data-table
-        title="Daftar Koleksi Buku"
+        title="Daftar Koleksi Pustaka"
         subtitle="Total {{ count($bukuList) }} data buku terdaftar dalam katalog sistem"
-        searchPlaceholder="Cari judul, penulis, ISBN..."
+        searchPlaceholder="Cari judul, penulis, ISBN, nomor panggil..."
     >
         <table class="admin-table">
             <thead>
                 <tr>
                     <th style="width: 50px;">No</th>
-                    <th>Judul & Informasi Panggil</th>
+                    <th>Judul & Nomor Panggil</th>
                     <th>Penulis / Pengarang</th>
                     <th>Penerbit & Tahun</th>
                     <th>ISBN</th>
                     <th>Kategori</th>
                     <th>Lokasi Rak</th>
                     <th>Status</th>
-                    <th style="width: 140px; text-align: right;">Aksi</th>
+                    <th style="width: 130px; text-align: right;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($bukuList as $index => $buku)
                     <tr>
-                        <td>{{ $index + 1 }}</td>
+                        <td style="font-family: var(--font-mono); color: var(--text-muted);">{{ $index + 1 }}</td>
                         <td>
-                            <div style="font-weight: 700; color: var(--text-dark); font-size: 0.9rem;">
+                            <div style="font-weight: 700; color: var(--text-dark); font-size: 0.92rem;">
                                 {{ $buku['judul'] }}
                             </div>
-                            <div style="font-size: 0.74rem; color: var(--text-muted); font-family: monospace;">
-                                No. Panggil: <strong>{{ $buku['no_panggil'] }}</strong>
+                            <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono); margin-top: 2px;">
+                                No. Panggil: <strong style="color: var(--primary);">{{ $buku['no_panggil'] }}</strong>
                             </div>
                         </td>
                         <td>
-                            <span style="font-weight: 600;">{{ $buku['penulis'] }}</span>
+                            <span style="font-weight: 600; color: var(--text-body);">{{ $buku['penulis'] }}</span>
                         </td>
                         <td>
-                            <div>{{ $buku['penerbit'] }}</div>
-                            <div style="font-size: 0.74rem; color: var(--text-muted);">Tahun: {{ $buku['tahun'] }}</div>
+                            <div style="font-weight: 500;">{{ $buku['penerbit'] }}</div>
+                            <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">Tahun: {{ $buku['tahun'] }}</div>
                         </td>
-                        <td style="font-family: monospace; font-size: 0.8rem;">
+                        <td style="font-family: var(--font-mono); font-size: 0.78rem;">
                             {{ $buku['isbn'] }}
                         </td>
                         <td>
@@ -74,28 +71,18 @@
                             <div class="action-buttons" style="justify-content: flex-end;">
                                 <!-- Detail Button -->
                                 <button type="button" class="btn-table-action" title="Detail Informasi Buku" onclick="lihatDetailBuku({{ json_encode($buku) }})">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                                    </svg>
+                                    <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
                                 </button>
                                 <!-- Edit Button -->
                                 <button type="button" class="btn-table-action" title="Edit Data Buku" onclick="editBuku({{ json_encode($buku) }})">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                    </svg>
+                                    <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i>
                                 </button>
                                 <!-- Delete Button -->
                                 <form method="POST" action="{{ route('admin.perpustakaan.buku.destroy', $buku['id']) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus buku ini?');" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn-table-action btn-table-action--delete" title="Hapus Buku">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                        </svg>
+                                        <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
                                     </button>
                                 </form>
                             </div>
@@ -105,7 +92,9 @@
                     <tr>
                         <td colspan="9">
                             <div class="admin-empty-state">
-                                <p>Tidak ada data katalog buku yang sesuai.</p>
+                                <i data-lucide="book-x" style="width: 44px; height: 44px; color: var(--text-muted);"></i>
+                                <div class="admin-empty-title">Tidak ada buku ditemukan</div>
+                                <p class="admin-empty-desc">Coba gunakan kata kunci pencarian yang berbeda.</p>
                             </div>
                         </td>
                     </tr>
@@ -124,7 +113,7 @@
     </x-admin.data-table>
 
     <!-- 1. MODAL TAMBAH BUKU -->
-    <x-admin.modal id="tambahBukuModal" title="Tambah Buku Baru (OPAC)" size="lg">
+    <x-admin.modal id="tambahBukuModal" title="Tambah Koleksi Buku Baru (OPAC)" size="lg">
         <form method="POST" action="{{ route('admin.perpustakaan.buku.store') }}" id="formTambahBuku">
             @csrf
             <div class="admin-form-grid admin-form-grid--2col">
@@ -157,13 +146,16 @@
 
             <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px;">
                 <button type="button" class="admin-btn admin-btn--secondary" data-modal-close>Batal</button>
-                <button type="submit" class="admin-btn admin-btn--primary">Simpan ke Katalog</button>
+                <button type="submit" class="admin-btn admin-btn--primary">
+                    <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                    <span>Simpan ke Katalog</span>
+                </button>
             </div>
         </form>
     </x-admin.modal>
 
     <!-- 2. MODAL EDIT BUKU -->
-    <x-admin.modal id="editBukuModal" title="Edit Data Buku" size="lg">
+    <x-admin.modal id="editBukuModal" title="Edit Data Katalog Buku" size="lg">
         <form method="POST" id="formEditBuku" action="{{ route('admin.perpustakaan.buku.update', 1) }}">
             @csrf
             @method('PUT')
@@ -185,14 +177,17 @@
 
             <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px;">
                 <button type="button" class="admin-btn admin-btn--secondary" data-modal-close>Batal</button>
-                <button type="submit" class="admin-btn admin-btn--primary">Perbarui Data</button>
+                <button type="submit" class="admin-btn admin-btn--primary">
+                    <i data-lucide="save" style="width: 16px; height: 16px;"></i>
+                    <span>Perbarui Data</span>
+                </button>
             </div>
         </form>
     </x-admin.modal>
 
     <!-- 3. MODAL DETAIL BUKU -->
     <x-admin.modal id="detailBukuModal" title="Detail Informasi Katalog Buku" size="md">
-        <div id="detailBukuContent" style="display: flex; flex-direction: column; gap: 14px;">
+        <div id="detailBukuContent" style="display: flex; flex-direction: column; gap: 16px;">
             <!-- Populated via JavaScript -->
         </div>
         <x-slot:footer>
@@ -205,21 +200,21 @@
         function lihatDetailBuku(buku) {
             const container = document.getElementById('detailBukuContent');
             container.innerHTML = `
-                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
+                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 14px;">
                     <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: var(--primary); margin-bottom: 4px;">${buku.judul}</h3>
                     <p style="font-size: 0.85rem; color: var(--text-muted);">Penulis: <strong>${buku.penulis}</strong> | Penerbit: <strong>${buku.penerbit} (${buku.tahun})</strong></p>
                 </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.82rem; background: var(--bg-admin); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-                    <div><strong>ISBN:</strong> ${buku.isbn}</div>
-                    <div><strong>Nomor Panggil:</strong> ${buku.no_panggil}</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.82rem; background: var(--bg-admin); padding: 16px; border-radius: 14px; border: 1px solid var(--border-color);">
+                    <div><strong>ISBN:</strong> <span style="font-family: var(--font-mono);">${buku.isbn}</span></div>
+                    <div><strong>Nomor Panggil:</strong> <span style="font-family: var(--font-mono); color: var(--primary); font-weight: 700;">${buku.no_panggil}</span></div>
                     <div><strong>Kategori:</strong> ${buku.kategori}</div>
                     <div><strong>Lokasi Rak:</strong> ${buku.lokasi_rak}</div>
                     <div><strong>Status:</strong> ${buku.status}</div>
-                    <div><strong>Eksemplar:</strong> ${buku.sisa_eksemplar || 1} / ${buku.total_eksemplar || 1} Tersedia</div>
+                    <div><strong>Ketersediaan:</strong> ${buku.sisa_eksemplar || 1} / ${buku.total_eksemplar || 1} Eksemplar</div>
                 </div>
                 <div>
-                    <h5 style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; margin-bottom: 4px;">Sinopsis Buku:</h5>
-                    <p style="font-size: 0.82rem; color: var(--text-body); line-height: 1.6;">${buku.sinopsis || 'Tidak ada deskripsi sinopsis.'}</p>
+                    <h5 style="font-family: var(--font-heading); font-size: 0.86rem; font-weight: 700; margin-bottom: 4px; color: var(--text-dark);">Sinopsis Buku:</h5>
+                    <p style="font-size: 0.84rem; color: var(--text-body); line-height: 1.6; background: var(--bg-card); padding: 12px; border-radius: 10px; border: 1px solid var(--border-light);">${buku.sinopsis || 'Tidak ada deskripsi sinopsis.'}</p>
                 </div>
             `;
             openAdminModal('detailBukuModal');

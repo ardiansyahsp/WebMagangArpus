@@ -10,10 +10,7 @@
     >
         <x-slot:actions>
             <button type="button" class="admin-btn admin-btn--primary" data-modal-target="tambahKategoriModal">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
+                <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
                 <span>Tambah Kategori Baru</span>
             </button>
         </x-slot:actions>
@@ -29,7 +26,7 @@
             <table class="admin-table">
                 <thead>
                     <tr>
-                        <th>Kode</th>
+                        <th style="width: 70px;">Kode</th>
                         <th>Nama Kategori</th>
                         <th>Jumlah Buku</th>
                         <th style="width: 90px; text-align: right;">Aksi</th>
@@ -39,7 +36,7 @@
                     @foreach($kategoriBuku as $kat)
                         <tr>
                             <td>
-                                <span style="font-family: monospace; font-weight: 700; color: var(--primary);">
+                                <span style="font-family: var(--font-mono); font-weight: 700; color: var(--primary); font-size: 0.82rem;">
                                     {{ $kat['kode'] }}
                                 </span>
                             </td>
@@ -48,24 +45,18 @@
                                 <div style="font-size: 0.74rem; color: var(--text-muted);">{{ $kat['deskripsi'] }}</div>
                             </td>
                             <td>
-                                <span style="font-weight: 600;">{{ number_format($kat['total_item'], 0, ',', '.') }} judul</span>
+                                <span style="font-weight: 600; font-size: 0.84rem;">{{ number_format($kat['total_item'], 0, ',', '.') }} judul</span>
                             </td>
                             <td style="text-align: right;">
                                 <div class="action-buttons" style="justify-content: flex-end;">
                                     <button type="button" class="btn-table-action" title="Edit Kategori" onclick="editKat('buku', {{ json_encode($kat) }})">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                        </svg>
+                                        <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i>
                                     </button>
                                     <form method="POST" action="{{ route('admin.pengaturan.kategori.destroy', $kat['id']) }}" onsubmit="return confirm('Hapus kategori ini?');" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn-table-action btn-table-action--delete" title="Hapus">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <polyline points="3 6 5 6 21 6"></polyline>
-                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                            </svg>
+                                            <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
                                         </button>
                                     </form>
                                 </div>
@@ -85,7 +76,7 @@
             <table class="admin-table">
                 <thead>
                     <tr>
-                        <th>Kode</th>
+                        <th style="width: 70px;">Kode</th>
                         <th>Nama Kategori</th>
                         <th>Jumlah Dokumen</th>
                         <th style="width: 90px; text-align: right;">Aksi</th>
@@ -95,7 +86,7 @@
                     @foreach($kategoriArsip as $kat)
                         <tr>
                             <td>
-                                <span style="font-family: monospace; font-weight: 700; color: var(--accent-gold-dark);">
+                                <span style="font-family: var(--font-mono); font-weight: 700; color: var(--accent-gold-dark); font-size: 0.82rem;">
                                     {{ $kat['kode'] }}
                                 </span>
                             </td>
@@ -104,24 +95,18 @@
                                 <div style="font-size: 0.74rem; color: var(--text-muted);">{{ $kat['deskripsi'] }}</div>
                             </td>
                             <td>
-                                <span style="font-weight: 600;">{{ number_format($kat['total_item'], 0, ',', '.') }} berkas</span>
+                                <span style="font-weight: 600; font-size: 0.84rem;">{{ number_format($kat['total_item'], 0, ',', '.') }} berkas</span>
                             </td>
                             <td style="text-align: right;">
                                 <div class="action-buttons" style="justify-content: flex-end;">
                                     <button type="button" class="btn-table-action" title="Edit Kategori" onclick="editKat('arsip', {{ json_encode($kat) }})">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                        </svg>
+                                        <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i>
                                     </button>
                                     <form method="POST" action="{{ route('admin.pengaturan.kategori.destroy', $kat['id']) }}" onsubmit="return confirm('Hapus kategori ini?');" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn-table-action btn-table-action--delete" title="Hapus">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <polyline points="3 6 5 6 21 6"></polyline>
-                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                            </svg>
+                                            <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
                                         </button>
                                     </form>
                                 </div>
@@ -149,7 +134,10 @@
 
             <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px;">
                 <button type="button" class="admin-btn admin-btn--secondary" data-modal-close>Batal</button>
-                <button type="submit" class="admin-btn admin-btn--primary">Simpan Kategori</button>
+                <button type="submit" class="admin-btn admin-btn--primary">
+                    <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                    <span>Simpan Kategori</span>
+                </button>
             </div>
         </form>
     </x-admin.modal>
@@ -167,7 +155,10 @@
 
             <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px;">
                 <button type="button" class="admin-btn admin-btn--secondary" data-modal-close>Batal</button>
-                <button type="submit" class="admin-btn admin-btn--primary">Perbarui</button>
+                <button type="submit" class="admin-btn admin-btn--primary">
+                    <i data-lucide="save" style="width: 16px; height: 16px;"></i>
+                    <span>Perbarui</span>
+                </button>
             </div>
         </form>
     </x-admin.modal>

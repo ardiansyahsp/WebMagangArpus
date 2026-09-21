@@ -1,12 +1,12 @@
 @props([
     'title' => null,
     'subtitle' => null,
-    'searchPlaceholder' => 'Cari dalam tabel...',
+    'searchPlaceholder' => 'Cari data...',
     'actions' => null,
     'footer' => null,
 ])
 
-<div class="admin-card">
+<div class="admin-card animate-fade-up">
     @if($title || $actions)
         <div class="admin-card__header">
             <div class="admin-card__title-box">
@@ -22,10 +22,7 @@
 
             <div class="admin-card__toolbar">
                 <div class="table-search-input">
-                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
+                    <i data-lucide="search" class="icon" style="width: 16px; height: 16px;"></i>
                     <input type="text" placeholder="{{ $searchPlaceholder }}" aria-label="Filter tabel">
                 </div>
 

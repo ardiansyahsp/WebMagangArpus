@@ -9,7 +9,7 @@
         ]"
     >
         <x-slot:actions>
-            <div style="display: flex; gap: 8px;">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                 <a href="{{ route('admin.kearsipan.permohonan') }}" class="admin-btn admin-btn--sm {{ !request('status') ? 'admin-btn--primary' : 'admin-btn--secondary' }}">
                     Semua ({{ count($permohonanList) }})
                 </a>
@@ -26,7 +26,7 @@
         </x-slot:actions>
     </x-admin.page-header>
 
-    <!-- Data Table Card -->
+    <!-- Data Table Card (Linear/Supabase Style) -->
     <x-admin.data-table
         title="Daftar Permohonan Riset Arsip Masuk"
         subtitle="Berkas permohonan penelusuran dokumen sejarah oleh akademisi, instansi, dan masyarakat umum"
@@ -35,43 +35,40 @@
         <table class="admin-table">
             <thead>
                 <tr>
-                    <th style="width: 120px;">No. Tiket</th>
+                    <th style="width: 140px;">No. Tiket</th>
                     <th>Nama Pemohon</th>
                     <th>Institusi / Universitas</th>
                     <th>Judul Penelitian & Fokus Riset</th>
                     <th>Surat Pengantar</th>
                     <th>Status Berkas</th>
-                    <th style="width: 180px; text-align: right;">Aksi</th>
+                    <th style="width: 160px; text-align: right;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($permohonanList as $p)
                     <tr>
                         <td>
-                            <span style="font-family: monospace; font-weight: 700; color: var(--primary);">
+                            <span style="font-family: var(--font-mono); font-weight: 700; color: var(--primary); font-size: 0.82rem;">
                                 {{ $p['nomor_tiket'] }}
                             </span>
-                            <div style="font-size: 0.72rem; color: var(--text-muted);">{{ $p['tanggal'] }}</div>
+                            <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">{{ $p['tanggal'] }}</div>
                         </td>
                         <td>
                             <div style="font-weight: 700; color: var(--text-dark);">{{ $p['nama'] }}</div>
-                            <div style="font-size: 0.75rem; color: var(--text-muted);">{{ $p['email'] }}</div>
+                            <div style="font-size: 0.74rem; color: var(--text-muted);">{{ $p['email'] }}</div>
                         </td>
                         <td>
                             <span style="font-weight: 500;">{{ $p['institusi'] }}</span>
                         </td>
                         <td>
-                            <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-dark); max-width: 320px;" title="{{ $p['judul'] }}">
+                            <div style="font-size: 0.84rem; font-weight: 600; color: var(--text-dark); max-width: 300px;" title="{{ $p['judul'] }}">
                                 {{ $p['judul'] }}
                             </div>
                         </td>
                         <td>
-                            <button type="button" class="admin-btn admin-btn--sm admin-btn--secondary" data-view-pdf="{{ $p['surat_pengantar'] }}" style="gap: 5px; font-size: 0.75rem;">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                    <polyline points="14 2 14 8 20 8"></polyline>
-                                </svg>
-                                <span>{{ substr($p['surat_pengantar'], 0, 16) }}...</span>
+                            <button type="button" class="admin-btn admin-btn--sm admin-btn--secondary" data-view-pdf="{{ $p['surat_pengantar'] }}" style="gap: 6px; font-size: 0.75rem; border-radius: 8px;">
+                                <i data-lucide="file-text" style="width: 14px; height: 14px; color: var(--primary);"></i>
+                                <span>{{ substr($p['surat_pengantar'], 0, 14) }}...</span>
                             </button>
                         </td>
                         <td>
@@ -81,25 +78,15 @@
                             <div class="action-buttons" style="justify-content: flex-end;">
                                 <!-- Lihat PDF -->
                                 <button type="button" class="btn-table-action" title="Lihat PDF Dokumen" data-view-pdf="{{ $p['surat_pengantar'] }}">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
+                                    <i data-lucide="file-check-2" style="width: 14px; height: 14px;"></i>
                                 </button>
                                 <!-- Unduh PDF -->
                                 <button type="button" class="btn-table-action" title="Unduh PDF Berkas" data-download-pdf="{{ $p['surat_pengantar'] }}">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                        <polyline points="7 10 12 15 17 10"></polyline>
-                                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                                    </svg>
+                                    <i data-lucide="download" style="width: 14px; height: 14px;"></i>
                                 </button>
                                 <!-- Ubah Status -->
                                 <button type="button" class="btn-table-action" title="Ubah Status Permohonan" onclick="ubahStatusArsip({{ json_encode($p) }})">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="9 11 12 14 22 4"></polyline>
-                                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                                    </svg>
+                                    <i data-lucide="check-square" style="width: 14px; height: 14px;"></i>
                                 </button>
                             </div>
                         </td>
@@ -108,7 +95,9 @@
                     <tr>
                         <td colspan="7">
                             <div class="admin-empty-state">
-                                <p>Tidak ada permohonan penelusuran arsip dengan status ini.</p>
+                                <i data-lucide="folder-search" style="width: 44px; height: 44px; color: var(--text-muted);"></i>
+                                <div class="admin-empty-title">Tidak ada permohonan arsip</div>
+                                <p class="admin-empty-desc">Tidak ditemukan data pengajuan dengan status ini.</p>
                             </div>
                         </td>
                     </tr>
@@ -121,10 +110,10 @@
     <x-admin.modal id="modalStatusArsip" title="Ubah Status Permohonan Penelusuran" size="md">
         <form method="POST" id="formStatusArsip" action="{{ route('admin.kearsipan.permohonan.status', 1) }}">
             @csrf
-            <div style="background: var(--bg-admin); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 16px;">
-                <div style="font-size: 0.74rem; font-weight: 700; color: var(--text-muted);">NOMOR TIKET: <span id="spanTiket" style="color: var(--primary);"></span></div>
-                <h4 style="font-family: var(--font-heading); font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin: 4px 0;" id="spanPemohon"></h4>
-                <div style="font-size: 0.78rem; color: var(--text-muted);" id="spanJudul"></div>
+            <div style="background: var(--bg-admin); padding: 16px; border-radius: 14px; border: 1px solid var(--border-color); margin-bottom: 18px;">
+                <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">NOMOR TIKET: <span id="spanTiket" style="color: var(--primary); font-family: var(--font-mono);"></span></div>
+                <h4 style="font-family: var(--font-heading); font-size: 0.95rem; font-weight: 800; color: var(--text-dark); margin: 4px 0;" id="spanPemohon"></h4>
+                <div style="font-size: 0.8rem; color: var(--text-muted);" id="spanJudul"></div>
             </div>
 
             <x-admin.form-select name="status" label="Status Tindak Lanjut" required>
@@ -139,7 +128,10 @@
 
             <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px;">
                 <button type="button" class="admin-btn admin-btn--secondary" data-modal-close>Batal</button>
-                <button type="submit" class="admin-btn admin-btn--primary">Simpan Perubahan</button>
+                <button type="submit" class="admin-btn admin-btn--primary">
+                    <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                    <span>Simpan Perubahan</span>
+                </button>
             </div>
         </form>
     </x-admin.modal>

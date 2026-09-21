@@ -10,17 +10,14 @@
     >
         <x-slot:actions>
             <button type="button" class="admin-btn admin-btn--primary" data-modal-target="tambahGaleriModal">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
+                <i data-lucide="upload" style="width: 16px; height: 16px;"></i>
                 <span>Upload Arsip Baru</span>
             </button>
         </x-slot:actions>
     </x-admin.page-header>
 
     <!-- Filter Tab Bar by Era -->
-    <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
+    <div style="display: flex; gap: 8px; margin-bottom: 22px; flex-wrap: wrap;">
         <a href="{{ route('admin.kearsipan.galeri') }}" class="admin-btn admin-btn--sm {{ !request('era') ? 'admin-btn--primary' : 'admin-btn--secondary' }}">
             Semua Era ({{ count($galeriList) }})
         </a>
@@ -31,11 +28,11 @@
             Era Kemerdekaan (1945-1950)
         </a>
         <a href="{{ route('admin.kearsipan.galeri', ['era' => 'Modern']) }}" class="admin-btn admin-btn--sm {{ request('era') === 'Modern' ? 'admin-btn--primary' : 'admin-btn--secondary' }}">
-            Era Pembangunan Modern
+            Era Modern
         </a>
     </div>
 
-    <!-- Data Table Card -->
+    <!-- Data Table Card (Supabase Style) -->
     <x-admin.data-table
         title="Koleksi Khazanah Galeri Arsip"
         subtitle="Dokumentasi arsip sejarah yang dipublikasikan pada portal pameran daring"
@@ -50,26 +47,26 @@
                     <th>Tahun Rekaman</th>
                     <th>Era Sejarah</th>
                     <th>Sumber Hak Cipta</th>
-                    <th style="width: 140px; text-align: right;">Aksi</th>
+                    <th style="width: 130px; text-align: right;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($galeriList as $index => $item)
                     <tr>
-                        <td>{{ $index + 1 }}</td>
+                        <td style="font-family: var(--font-mono); color: var(--text-muted);">{{ $index + 1 }}</td>
                         <td>
-                            <div style="width: 70px; height: 50px; border-radius: var(--radius-xs); overflow: hidden; background: #000; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
+                            <div style="width: 72px; height: 50px; border-radius: 10px; overflow: hidden; background: #000; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-subtle);">
                                 <img src="{{ asset('asset/bakgron.jpg') }}" alt="{{ $item['judul'] }}" style="width: 100%; height: 100%; object-fit: cover;" />
                             </div>
                         </td>
                         <td>
-                            <div style="font-weight: 700; color: var(--text-dark); font-size: 0.88rem;">{{ $item['judul'] }}</div>
-                            <div style="font-size: 0.76rem; color: var(--text-muted); max-width: 320px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                            <div style="font-weight: 700; color: var(--text-dark); font-size: 0.9rem;">{{ $item['judul'] }}</div>
+                            <div style="font-size: 0.76rem; color: var(--text-muted); max-width: 320px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-top: 2px;">
                                 {{ $item['deskripsi'] }}
                             </div>
                         </td>
                         <td>
-                            <span style="font-family: var(--font-heading); font-weight: 700; color: var(--primary);">{{ $item['tahun'] }}</span>
+                            <span style="font-family: var(--font-mono); font-weight: 700; color: var(--primary); font-size: 0.88rem;">{{ $item['tahun'] }}</span>
                         </td>
                         <td>
                             <span class="status-badge {{ $item['era'] === 'Kolonial' ? 'status-badge--warning' : ($item['era'] === 'Kemerdekaan' ? 'status-badge--danger' : 'status-badge--info') }}">
@@ -77,31 +74,21 @@
                             </span>
                         </td>
                         <td>
-                            <div style="font-size: 0.78rem; color: var(--text-body);">{{ $item['hak_cipta'] }}</div>
+                            <div style="font-size: 0.8rem; color: var(--text-body); font-weight: 500;">{{ $item['hak_cipta'] }}</div>
                         </td>
                         <td style="text-align: right;">
                             <div class="action-buttons" style="justify-content: flex-end;">
                                 <button type="button" class="btn-table-action" title="Detail Kuratorial" onclick="detailGaleri({{ json_encode($item) }})">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                                    </svg>
+                                    <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
                                 </button>
                                 <button type="button" class="btn-table-action" title="Edit Arsip" onclick="editGaleri({{ json_encode($item) }})">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                    </svg>
+                                    <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i>
                                 </button>
                                 <form method="POST" action="{{ route('admin.kearsipan.galeri.destroy', $item['id']) }}" onsubmit="return confirm('Hapus arsip sejarah ini?');" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn-table-action btn-table-action--delete" title="Hapus Arsip">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                        </svg>
+                                        <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
                                     </button>
                                 </form>
                             </div>
@@ -111,7 +98,9 @@
                     <tr>
                         <td colspan="7">
                             <div class="admin-empty-state">
-                                <p>Tidak ada data arsip sejarah untuk kategori era ini.</p>
+                                <i data-lucide="image-off" style="width: 44px; height: 44px; color: var(--text-muted);"></i>
+                                <div class="admin-empty-title">Tidak ada arsip sejarah</div>
+                                <p class="admin-empty-desc">Belum ada dokumen yang terdaftar untuk era ini.</p>
                             </div>
                         </td>
                     </tr>
@@ -150,13 +139,16 @@
 
             <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px;">
                 <button type="button" class="admin-btn admin-btn--secondary" data-modal-close>Batal</button>
-                <button type="submit" class="admin-btn admin-btn--primary">Publikasikan ke Galeri</button>
+                <button type="submit" class="admin-btn admin-btn--primary">
+                    <i data-lucide="upload-cloud" style="width: 16px; height: 16px;"></i>
+                    <span>Publikasikan ke Galeri</span>
+                </button>
             </div>
         </form>
     </x-admin.modal>
 
     <!-- 2. MODAL EDIT ARSIP -->
-    <x-admin.modal id="editGaleriModal" title="Edit Arsip Sejarah" size="lg">
+    <x-admin.modal id="editGaleriModal" title="Edit Data Arsip Sejarah" size="lg">
         <form method="POST" id="formEditGaleri" action="{{ route('admin.kearsipan.galeri.update', 1) }}">
             @csrf
             @method('PUT')
@@ -180,14 +172,17 @@
 
             <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px;">
                 <button type="button" class="admin-btn admin-btn--secondary" data-modal-close>Batal</button>
-                <button type="submit" class="admin-btn admin-btn--primary">Perbarui Arsip</button>
+                <button type="submit" class="admin-btn admin-btn--primary">
+                    <i data-lucide="save" style="width: 16px; height: 16px;"></i>
+                    <span>Perbarui Arsip</span>
+                </button>
             </div>
         </form>
     </x-admin.modal>
 
     <!-- 3. MODAL DETAIL KURATORIAL -->
-    <x-admin.modal id="detailGaleriModal" title="Informasi Kuratorial Arsip" size="md">
-        <div id="detailGaleriContent" style="display: flex; flex-direction: column; gap: 14px;"></div>
+    <x-admin.modal id="detailGaleriModal" title="Informasi Kuratorial Khazanah Arsip" size="md">
+        <div id="detailGaleriContent" style="display: flex; flex-direction: column; gap: 16px;"></div>
         <x-slot:footer>
             <button type="button" class="admin-btn admin-btn--secondary" data-modal-close>Tutup</button>
         </x-slot:footer>
@@ -198,16 +193,16 @@
         function detailGaleri(item) {
             const container = document.getElementById('detailGaleriContent');
             container.innerHTML = `
-                <div style="border-radius: var(--radius-md); overflow: hidden; height: 180px; background: #000; display: flex; align-items: center; justify-content: center;">
+                <div style="border-radius: 16px; overflow: hidden; height: 190px; background: #000; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
                     <img src="{{ asset('asset/bakgron.jpg') }}" alt="${item.judul}" style="width: 100%; height: 100%; object-fit: cover;" />
                 </div>
                 <div>
                     <span class="status-badge status-badge--info" style="margin-bottom: 6px;">Era ${item.era} (${item.tahun})</span>
-                    <h3 style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 800; color: var(--primary); margin-top: 4px;">${item.judul}</h3>
-                    <p style="font-size: 0.78rem; color: var(--text-muted);">Hak Cipta: <strong>${item.hak_cipta}</strong></p>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: var(--primary); margin-top: 4px;">${item.judul}</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">Hak Cipta: <strong>${item.hak_cipta}</strong></p>
                 </div>
-                <div style="background: var(--bg-admin); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px; font-size: 0.84rem; line-height: 1.6;">
-                    <strong>Deskripsi Kurasi:</strong><br>
+                <div style="background: var(--bg-admin); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; font-size: 0.85rem; line-height: 1.6; color: var(--text-body);">
+                    <strong style="color: var(--text-dark);">Deskripsi Kurasi:</strong><br>
                     ${item.deskripsi}
                 </div>
             `;

@@ -10,7 +10,7 @@
         $badgeClass = 'status-badge--' . $variant;
     } else {
         $badgeClass = match($normalized) {
-            'tersedia', 'beroperasi', 'selesai', 'aktif', 'arsiparis' => 'status-badge--success',
+            'tersedia', 'beroperasi', 'selesai', 'aktif', 'arsiparis', 'terverifikasi tte' => 'status-badge--success',
             'menunggu validasi', 'diproses', 'menunggu review' => 'status-badge--warning',
             'disetujui', 'pustakawan' => 'status-badge--info',
             'akan dibeli' => 'status-badge--purple',

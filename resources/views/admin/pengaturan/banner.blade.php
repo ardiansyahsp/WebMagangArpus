@@ -2,7 +2,7 @@
     <!-- Page Header -->
     <x-admin.page-header
         title="Manajemen Banner Utama (Hero)"
-        subtitle="Atur konten slider promo, pesan informasi kepala dinas, dan gambar latar beranda utama website."
+        subtitle="Atur konten slider promo, pesan informasi kepala dinas, dan gambar latar beranda utama portal website."
         :breadcrumbs="[
             ['label' => 'Pengaturan', 'url' => route('admin.pengaturan.kategori')],
             ['label' => 'Banner Utama']
@@ -10,71 +10,71 @@
     >
         <x-slot:actions>
             <button type="button" class="admin-btn admin-btn--primary" data-modal-target="tambahBannerModal">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="12" y1="8" x2="12" y2="16"></line>
-                    <line x1="8" y1="12" x2="16" y2="12"></line>
-                </svg>
+                <i data-lucide="image-plus" style="width: 16px; height: 16px;"></i>
                 <span>Tambah Banner Baru</span>
             </button>
         </x-slot:actions>
     </x-admin.page-header>
 
-    <!-- 1. LIVE PREVIEW BANNER SECTION -->
+    <!-- 1. LIVE PREVIEW BANNER SECTION (Stripe/Linear Luxury Glass Style) -->
     <div class="admin-card" style="margin-bottom: 26px;">
         <div class="admin-card__header">
             <div>
-                <h3 class="admin-card__title">Pratinjau Langsung (Live Preview Hero Beranda)</h3>
-                <p class="admin-card__subtitle">Tampilan banner aktif saat diakses oleh pengunjung di beranda portal publik</p>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="display: inline-flex; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981;"></span>
+                    <h3 class="admin-card__title">Pratinjau Langsung (Live Preview Hero Beranda)</h3>
+                </div>
+                <p class="admin-card__subtitle">Tampilan banner aktif saat diakses oleh pengunjung di beranda portal publik Arpusda</p>
             </div>
             <a href="{{ route('home') }}" target="_blank" class="admin-btn admin-btn--sm admin-btn--secondary">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-                <span>Buka Beranda</span>
+                <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+                <span>Buka Beranda Publik</span>
             </a>
         </div>
 
         <div style="padding: 24px;">
-            <div style="position: relative; border-radius: var(--radius-lg); overflow: hidden; background: linear-gradient(135deg, rgba(74, 9, 9, 0.95) 0%, rgba(26, 2, 2, 0.98) 100%); color: #ffffff; padding: 40px 32px; box-shadow: var(--shadow-lg); border: 1px solid rgba(232, 184, 75, 0.3);">
-                <div style="position: absolute; right: 0; top: 0; bottom: 0; width: 45%; opacity: 0.25; background: url('{{ asset('asset/bakgron.jpg') }}') center/cover no-repeat; pointer-events: none;"></div>
-                
-                <div style="position: relative; z-index: 2; max-width: 620px;">
-                    <div style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 0.76rem; font-weight: 800; letter-spacing: 1.5px; color: var(--accent-gold); margin-bottom: 12px;" id="previewTagline">
-                        <span style="width: 24px; height: 2px; background: var(--accent-gold);"></span>
+            <div style="position: relative; border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, rgba(74, 9, 9, 0.96) 0%, rgba(26, 2, 2, 0.98) 100%); color: #ffffff; padding: 48px 36px; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3); border: 1px solid rgba(232, 184, 75, 0.35);">
+                <!-- Ambient Background Image Overlay -->
+                <div style="position: absolute; right: 0; top: 0; bottom: 0; width: 50%; opacity: 0.22; background: url('{{ asset('asset/bakgron.jpg') }}') center/cover no-repeat; pointer-events: none; mask-image: linear-gradient(to right, transparent, black);"></div>
+                <div style="position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(244, 180, 0, 0.25) 0%, transparent 70%); pointer-events: none;"></div>
+
+                <div style="position: relative; z-index: 2; max-width: 640px;">
+                    <div style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 0.76rem; font-weight: 800; letter-spacing: 1.5px; color: var(--accent-gold); margin-bottom: 14px; text-transform: uppercase;" id="previewTagline">
+                        <span style="width: 20px; height: 2px; background: var(--accent-gold);"></span>
                         WEBSITE RESMI DINAS ARSIP & PERPUSTAKAAN KOTA SEMARANG
                     </div>
                     
-                    <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; line-height: 1.25; margin-bottom: 12px; color: #ffffff;" id="previewJudul">
+                    <h2 style="font-family: var(--font-heading); font-size: 1.85rem; font-weight: 800; line-height: 1.25; margin-bottom: 14px; color: #ffffff;" id="previewJudul">
                         Inovasi Layanan Menuju <span style="color: var(--accent-gold);">Arsip & Literasi Sempurna</span>
                     </h2>
 
-                    <p style="font-size: 0.88rem; color: rgba(255, 255, 255, 0.8); line-height: 1.6; margin-bottom: 20px;" id="previewDeskripsi">
+                    <p style="font-size: 0.88rem; color: rgba(255, 255, 255, 0.85); line-height: 1.65; margin-bottom: 24px;" id="previewDeskripsi">
                         Menyediakan keterbukaan informasi publik, kemudahan akses koleksi pustaka, serta pengelolaan arsip daerah yang modern, akurat, dan terpercaya bagi masyarakat Kota Semarang.
                     </p>
 
-                    <div style="display: flex; gap: 12px;">
-                        <button type="button" class="admin-btn admin-btn--gold" id="previewBtn">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <button type="button" class="admin-btn admin-btn--gold" id="previewBtn" style="border-radius: 12px; padding: 10px 22px; font-weight: 700;">
                             Jelajahi Layanan
                         </button>
+                        <span style="font-size: 0.78rem; color: rgba(255, 255, 255, 0.6); font-family: var(--font-mono);" id="previewLink">
+                            Link: #layanan
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 2. DATA TABLE: DAFTAR BANNER & SLIDES -->
+    <!-- 2. DATA TABLE: DAFTAR BANNER & SLIDES (Linear/Supabase Style) -->
     <x-admin.data-table
-        title="Daftar Banner & Slideshow"
-        subtitle="Kelola urutan dan status aktif slide banner promosi"
-        searchPlaceholder="Cari judul banner..."
+        title="Daftar Banner & Slideshow Beranda"
+        subtitle="Kelola urutan perputaran, status aktif slide, dan parameter banner utama"
+        searchPlaceholder="Cari judul atau tagline banner..."
     >
         <table class="admin-table">
             <thead>
                 <tr>
-                    <th style="width: 60px;">Urutan</th>
+                    <th style="width: 70px;">Urutan</th>
                     <th style="width: 120px;">Thumbnail</th>
                     <th>Judul Banner & Tagline</th>
                     <th>Tombol Aksi (CTA)</th>
@@ -85,44 +85,44 @@
             <tbody>
                 @forelse($bannerList as $b)
                     <tr>
-                        <td style="font-family: monospace; font-weight: 700; font-size: 1rem; color: var(--text-dark);">
-                            #{{ $b['urutan'] }}
+                        <td>
+                            <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--bg-admin); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 800; font-size: 0.85rem; color: var(--primary);">
+                                #{{ $b['urutan'] }}
+                            </div>
                         </td>
                         <td>
-                            <div style="width: 90px; height: 50px; border-radius: var(--radius-xs); overflow: hidden; background: #000; border: 1px solid var(--border-color);">
+                            <div style="width: 96px; height: 54px; border-radius: 10px; overflow: hidden; background: #000; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); position: relative;">
                                 <img src="{{ asset('asset/bakgron.jpg') }}" alt="{{ $b['judul'] }}" style="width: 100%; height: 100%; object-fit: cover;" />
                             </div>
                         </td>
                         <td>
-                            <div style="font-size: 0.72rem; font-weight: 700; color: var(--accent-gold-dark); text-transform: uppercase;">{{ $b['tagline'] }}</div>
-                            <div style="font-weight: 700; color: var(--text-dark); font-size: 0.88rem;">{{ $b['judul'] }}</div>
-                            <div style="font-size: 0.75rem; color: var(--text-muted); max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $b['deskripsi'] }}</div>
+                            <div style="font-size: 0.72rem; font-weight: 800; color: var(--accent-gold-dark); text-transform: uppercase; letter-spacing: 0.5px;">{{ $b['tagline'] }}</div>
+                            <div style="font-weight: 700; color: var(--text-dark); font-size: 0.9rem; margin: 2px 0;">{{ $b['judul'] }}</div>
+                            <div style="font-size: 0.76rem; color: var(--text-muted); max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $b['deskripsi'] }}</div>
                         </td>
                         <td>
-                            <span style="font-size: 0.8rem; font-weight: 600;">{{ $b['cta_text'] }}</span>
-                            <div style="font-size: 0.72rem; color: var(--text-muted); font-family: monospace;">{{ $b['cta_url'] }}</div>
+                            <div style="display: flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 600; color: var(--text-dark);">
+                                <i data-lucide="mouse-pointer-click" style="width: 13px; height: 13px; color: var(--primary);"></i>
+                                <span>{{ $b['cta_text'] }}</span>
+                            </div>
+                            <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono); margin-top: 2px;">{{ $b['cta_url'] }}</div>
                         </td>
                         <td>
                             <form method="POST" action="{{ route('admin.pengaturan.banner.toggle', $b['id']) }}" style="display: inline;">
                                 @csrf
-                                <button type="submit" class="status-badge {{ $b['status'] === 'Aktif' ? 'status-badge--success' : 'status-badge--danger' }}" style="border: none; cursor: pointer;">
-                                    {{ $b['status'] }}
+                                <button type="submit" class="status-badge {{ $b['status'] === 'Aktif' ? 'status-badge--success' : 'status-badge--danger' }}" style="border: none; cursor: pointer;" title="Klik untuk ubah status aktif">
+                                    <span style="width: 6px; height: 6px; border-radius: 50%; background: currentColor;"></span>
+                                    <span>{{ $b['status'] }}</span>
                                 </button>
                             </form>
                         </td>
                         <td style="text-align: right;">
                             <div class="action-buttons" style="justify-content: flex-end;">
-                                <button type="button" class="btn-table-action" title="Terapkan ke Pratinjau" onclick="setPreview({{ json_encode($b) }})">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
+                                <button type="button" class="btn-table-action" title="Terapkan ke Pratinjau Atas" onclick="setPreview({{ json_encode($b) }})">
+                                    <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
                                 </button>
-                                <button type="button" class="btn-table-action" title="Edit Banner" onclick="editBanner({{ json_encode($b) }})">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                    </svg>
+                                <button type="button" class="btn-table-action" title="Edit Pengaturan Banner" onclick="editBanner({{ json_encode($b) }})">
+                                    <i data-lucide="pencil" style="width: 14px; height: 14px;"></i>
                                 </button>
                             </div>
                         </td>
@@ -131,7 +131,9 @@
                     <tr>
                         <td colspan="6">
                             <div class="admin-empty-state">
-                                <p>Belum ada banner yang terdaftar.</p>
+                                <i data-lucide="image" style="width: 44px; height: 44px; color: var(--text-muted);"></i>
+                                <div class="admin-empty-title">Belum ada banner terdaftar</div>
+                                <p class="admin-empty-desc">Tambahkan slide banner baru untuk mempercantik tampilan beranda website.</p>
                             </div>
                         </td>
                     </tr>
@@ -146,7 +148,7 @@
             @csrf
             <div class="admin-form-grid admin-form-grid--2col">
                 <div style="grid-column: span 2;">
-                    <x-admin.form-input name="gambar_banner" label="File Gambar Hero / Banner" type="file" required helper="Ukuran rekomendasi: 1920x800 px (Maks. 5MB)" />
+                    <x-admin.form-input name="gambar_banner" label="File Gambar Hero / Banner" type="file" required helper="Ukuran rekomendasi: 1920x800 px (Format: JPG/PNG/WebP, Maks. 5MB)" />
                 </div>
                 <div style="grid-column: span 2;">
                     <x-admin.form-input name="tagline" label="Tagline / Subheading Kecil" placeholder="Contoh: WEBSITE RESMI DINAS ARSIP & PERPUSTAKAAN" required />
@@ -155,7 +157,7 @@
                     <x-admin.form-input name="judul" label="Judul Utama Banner" placeholder="Contoh: Inovasi Layanan Menuju Arsip & Literasi Sempurna" required />
                 </div>
                 <div style="grid-column: span 2;">
-                    <x-admin.form-input name="deskripsi" label="Deskripsi Paragraf" type="textarea" rows="3" placeholder="Tuliskan pesan utama yang ingin disampaikan..." required />
+                    <x-admin.form-input name="deskripsi" label="Deskripsi Paragraf Lengkap" type="textarea" rows="3" placeholder="Tuliskan pesan utama yang ingin disampaikan kepada masyarakat..." required />
                 </div>
                 <x-admin.form-input name="cta_text" label="Teks Tombol Aksi" placeholder="Contoh: Jelajahi Layanan" value="Jelajahi Layanan" />
                 <x-admin.form-input name="cta_url" label="Tautan / Link Tombol" placeholder="Contoh: #layanan atau /katalog-buku" value="#layanan" />
@@ -163,7 +165,10 @@
 
             <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px;">
                 <button type="button" class="admin-btn admin-btn--secondary" data-modal-close>Batal</button>
-                <button type="submit" class="admin-btn admin-btn--primary">Simpan Banner</button>
+                <button type="submit" class="admin-btn admin-btn--primary">
+                    <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                    <span>Simpan & Aktifkan Banner</span>
+                </button>
             </div>
         </form>
     </x-admin.modal>
@@ -175,21 +180,24 @@
             @method('PUT')
             <div class="admin-form-grid admin-form-grid--2col">
                 <div style="grid-column: span 2;">
-                    <x-admin.form-input name="edit_tagline" id="edit_tagline" label="Tagline" required />
+                    <x-admin.form-input name="edit_tagline" id="edit_tagline" label="Tagline / Subheading" required />
                 </div>
                 <div style="grid-column: span 2;">
-                    <x-admin.form-input name="edit_judul_banner" id="edit_judul_banner" label="Judul" required />
+                    <x-admin.form-input name="edit_judul_banner" id="edit_judul_banner" label="Judul Banner" required />
                 </div>
                 <div style="grid-column: span 2;">
-                    <x-admin.form-input name="edit_deskripsi_banner" id="edit_deskripsi_banner" label="Deskripsi" type="textarea" rows="3" required />
+                    <x-admin.form-input name="edit_deskripsi_banner" id="edit_deskripsi_banner" label="Deskripsi Paragraf" type="textarea" rows="3" required />
                 </div>
-                <x-admin.form-input name="edit_cta_text" id="edit_cta_text" label="Teks Tombol" required />
+                <x-admin.form-input name="edit_cta_text" id="edit_cta_text" label="Teks Tombol (CTA)" required />
                 <x-admin.form-input name="edit_cta_url" id="edit_cta_url" label="Link Tombol" required />
             </div>
 
             <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px;">
                 <button type="button" class="admin-btn admin-btn--secondary" data-modal-close>Batal</button>
-                <button type="submit" class="admin-btn admin-btn--primary">Simpan</button>
+                <button type="submit" class="admin-btn admin-btn--primary">
+                    <i data-lucide="save" style="width: 16px; height: 16px;"></i>
+                    <span>Simpan Perubahan</span>
+                </button>
             </div>
         </form>
     </x-admin.modal>
@@ -197,11 +205,15 @@
     @push('scripts')
     <script>
         function setPreview(banner) {
-            document.getElementById('previewTagline').innerHTML = `<span style="width: 24px; height: 2px; background: var(--accent-gold);"></span> ${banner.tagline}`;
+            document.getElementById('previewTagline').innerHTML = `<span style="width: 20px; height: 2px; background: var(--accent-gold);"></span> ${banner.tagline}`;
             document.getElementById('previewJudul').textContent = banner.judul;
             document.getElementById('previewDeskripsi').textContent = banner.deskripsi;
             document.getElementById('previewBtn').textContent = banner.cta_text;
-            window.showToast(`Pratinjau banner "${banner.judul}" dimuat!`, 'info');
+            const linkEl = document.getElementById('previewLink');
+            if (linkEl) {
+                linkEl.textContent = `Link: ${banner.cta_url}`;
+            }
+            window.showToast(`Pratinjau hero banner "${banner.judul}" berhasil dimuat!`, 'info');
         }
 
         function editBanner(banner) {
@@ -210,6 +222,8 @@
             document.getElementById('edit_deskripsi_banner').value = banner.deskripsi;
             document.getElementById('edit_cta_text').value = banner.cta_text;
             document.getElementById('edit_cta_url').value = banner.cta_url;
+            const form = document.getElementById('formEditBanner');
+            form.action = `/admin/pengaturan/banner/${banner.id}`;
             openAdminModal('editBannerModal');
         }
     </script>
