@@ -86,7 +86,6 @@ class BeritaService
     /**
      * Mengambil detail satu berita berdasarkan Slug
      *
-     * @param string $slug
      * @return array<string, string>|null
      */
     public function getBeritaBySlug(string $slug): ?array

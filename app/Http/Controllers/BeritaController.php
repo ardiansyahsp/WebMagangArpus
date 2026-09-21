@@ -20,6 +20,7 @@ class BeritaController extends Controller
 
         return view('berita', compact('beritaList'));
     }
+
     /**
      * Menampilkan halaman detail berita berdasarkan slug
      */
@@ -27,7 +28,7 @@ class BeritaController extends Controller
     {
         $berita = $this->beritaService->getBeritaBySlug($slug);
 
-        if (!$berita) {
+        if (! $berita) {
             abort(404, 'Berita tidak ditemukan.');
         }
 

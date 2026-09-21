@@ -109,34 +109,34 @@ class BerandaService
             // --- 4 JADWAL DI HARI SENIN ---
             [
                 'hari' => 'Senin', 'tanggal' => '14 September 2026', 'waktu' => '08:00 - 10:00 WIB',
-                'titik' => 'SDN 01 Ngaliyan', 'wilayah' => 'Kecamatan Ngaliyan', 'status' => 'Selesai'
+                'titik' => 'SDN 01 Ngaliyan', 'wilayah' => 'Kecamatan Ngaliyan', 'status' => 'Selesai',
             ],
             [
                 'hari' => 'Senin', 'tanggal' => '14 September 2026', 'waktu' => '10:30 - 12:00 WIB',
-                'titik' => 'Balai RW 03 Kalipancur', 'wilayah' => 'Kecamatan Ngaliyan', 'status' => 'Selesai'
+                'titik' => 'Balai RW 03 Kalipancur', 'wilayah' => 'Kecamatan Ngaliyan', 'status' => 'Selesai',
             ],
             [
                 'hari' => 'Senin', 'tanggal' => '14 September 2026', 'waktu' => '13:00 - 14:30 WIB',
-                'titik' => 'SMPN 16 Semarang', 'wilayah' => 'Kecamatan Ngaliyan', 'status' => 'Selesai'
+                'titik' => 'SMPN 16 Semarang', 'wilayah' => 'Kecamatan Ngaliyan', 'status' => 'Selesai',
             ],
             [
                 'hari' => 'Senin', 'tanggal' => '14 September 2026', 'waktu' => '15:00 - 16:30 WIB',
-                'titik' => 'Taman Lele Indah', 'wilayah' => 'Kecamatan Ngaliyan', 'status' => 'Selesai'
+                'titik' => 'Taman Lele Indah', 'wilayah' => 'Kecamatan Ngaliyan', 'status' => 'Selesai',
             ],
-            
+
             // --- JADWAL HARI LAINNYA ---
             [
                 'hari' => 'Rabu', 'tanggal' => '16 September 2026', 'waktu' => '09:00 - 13:00 WIB',
-                'titik' => 'Balai RW 05 Tembalang', 'wilayah' => 'Kecamatan Tembalang', 'status' => 'Akan Datang'
+                'titik' => 'Balai RW 05 Tembalang', 'wilayah' => 'Kecamatan Tembalang', 'status' => 'Akan Datang',
             ],
             [
                 'hari' => 'Kamis', 'tanggal' => '17 September 2026', 'waktu' => '08:30 - 12:00 WIB',
-                'titik' => 'Taman Tirto Agung', 'wilayah' => 'Kecamatan Banyumanik', 'status' => 'Akan Datang'
+                'titik' => 'Taman Tirto Agung', 'wilayah' => 'Kecamatan Banyumanik', 'status' => 'Akan Datang',
             ],
             [
                 'hari' => 'Sabtu', 'tanggal' => '19 September 2026', 'waktu' => '15:00 - 17:30 WIB',
-                'titik' => 'Simpang Lima (Car Free Day)', 'wilayah' => 'Kecamatan Semarang Selatan', 'status' => 'Akan Datang'
+                'titik' => 'Simpang Lima (Car Free Day)', 'wilayah' => 'Kecamatan Semarang Selatan', 'status' => 'Akan Datang',
             ],
         ];
     }
-    }
+}
